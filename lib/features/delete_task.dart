@@ -6,17 +6,29 @@ class DeleteTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+            appBar: AppBar(
+        title: Text("Deleted Task"),
+      ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start, // Align children to the start of the column
         children: [
-          Icon(Icons.check_box),
-          Checkbox(
-            value: false,
-            onChanged: (value) {},
+          Row(
+            children: [
+              Checkbox(
+                value: false,
+                onChanged: (value) {},
+              ),
+              Text('Clean'),
+            ],
           ),
-          Text('Clean'),
-          Text('Yesterday, 8:00 am'),
-          Icon(Icons.delete),
-          Text('Delete'),
+          Row(
+            children: [
+              Text('Yesterday, 8:00 am'),
+              Spacer(), // Add space to push the delete icon to the end
+              Icon(Icons.delete),
+              Text('Delete'),
+            ],
+          ),
         ],
       ),
     );
