@@ -15,6 +15,7 @@ class TaskManagerApp extends StatelessWidget {
       title: 'Task Manager',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'Roboto-Regular',
       ),
       initialRoute: '/',
       routes: {
@@ -30,11 +31,26 @@ class TaskManagerHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Task Manager"),
+        title: Text(
+          "Task Manager",
+          style: TextStyle(fontSize: 20.0),
+        ),
       ),
       drawer: HomeDrawer(), // Add the drawer to the Scaffold
-      body: Center(
-        child: Text("Your Task Manager Home Page"),
+      body: Container(
+        color: Colors.blue,
+        padding: EdgeInsets.all(16.0),
+        child: Center(
+          child: Text(
+            "Your Task Manager Home Page",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Roboto-Regular',
+            ),
+          ),
+        ), //
       ),
     );
   }
