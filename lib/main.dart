@@ -13,42 +13,49 @@ class TaskManagerApp extends StatelessWidget {
       title: 'Task Manager',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'Roboto-Regular',
       ),
-      home: TaskManagerHome(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => TaskManagerHome(),
+        '/deletedTask': (context) => DeletedTask(),
+      },
     );
   }
 }
 
-class DeleteTask extends StatelessWidget {
-  const DeleteTask({Key? key});
-
+class DeletedTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Deleted Task"),
+        title: const Text("Deleted Task", style: TextStyle(color: Colors.white)), 
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Checkbox(
-                value: false,
-                onChanged: (value) {},
-              ),
-              const Text('Clean'),
-            ],
-          ),
-          Row(
-            children: [
-              const Text('Yesterday, 8:00 am'),
-              const Spacer(),
-              const Icon(Icons.delete),
-              const Text('Delete'),
-            ],
-          ),
-        ],
+      body: Container(
+        color: Colors.white,
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Checkbox(
+                  value: false,
+                  onChanged: (value) {},
+                ),
+                const Text('Clean', style: TextStyle(color: Colors.white)), 
+              ],
+            ),
+            Row(
+              children: [
+                const Text('Yesterday, 8:00 am', style: TextStyle(color: Colors.white)), 
+                const Spacer(),
+                const Icon(Icons.delete, color: Colors.white), 
+                const Text('Delete', style: TextStyle(color: Colors.white)), 
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -59,11 +66,26 @@ class TaskManagerHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Task Manager"),
+        title: Text(
+          "Task Manager",
+          style: TextStyle(fontSize: 20.0, color: Colors.white), 
+        ),
       ),
-      drawer: HomeDrawer(), // Add the drawer to the Scaffold
-      body: Center(
-        child: Text("Your Task Manager Home Page"),
+      drawer: const HomeDrawer(),
+      body: Container(
+        color: Colors.blue,
+        padding: EdgeInsets.all(16.0),
+        child: Center(
+          child: Text(
+            "Your Task Manager Home Page",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Roboto-Regular',
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -75,15 +97,21 @@ class HomeDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Colors.blue,
       child: ListView(
         children: [
           ListTile(
-            title: const Text('Deleted Task'),
+            title: const Text('Deleted Task', style: TextStyle(color: Colors.white)), 
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const DeleteTask()),
+                MaterialPageRoute(
+                  builder: (context) => Container(
+                    color: Colors.blue,
+                    child: DeletedTask(),
+                  ),
+                ),
               );
             },
           ),
