@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'components/home_drawer.dart';
+import 'features/add_task.dart';
 
 void main() {
+//<<<<<<< deleted_task_Sermonia_Ordinario
   runApp(const TaskManagerApp());
+=======
+  runApp(TaskManagerApp());
+//>>>>>>> master
 }
 
 class TaskManagerApp extends StatelessWidget {
@@ -18,6 +24,7 @@ class TaskManagerApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => TaskManagerHome(),
+// deleted_task_Sermonia_Ordinario
         '/deletedTask': (context) => DeletedTask(),
       },
     );
@@ -25,10 +32,20 @@ class TaskManagerApp extends StatelessWidget {
 }
 
 class DeletedTask extends StatelessWidget {
+=======
+        '/addTask': (context) => AddTask(),
+      },
+    );
+  }
+}
+
+class TaskManagerHome extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+// deleted_task_Sermonia_Ordinario
         title: const Text("Deleted Task", style: TextStyle(color: Colors.white)), 
       ),
       body: Container(
@@ -53,10 +70,30 @@ class DeletedTask extends StatelessWidget {
                 const Icon(Icons.delete, color: Colors.white), 
                 const Text('Delete', style: TextStyle(color: Colors.white)), 
               ],
-            ),
-          ],
+=======
+        title: Text(
+          "Task Manager",
+          style: TextStyle(fontSize: 20.0),
         ),
       ),
+      drawer: HomeDrawer(), // Add the drawer to the Scaffold
+      body: Container(
+        color: Colors.blue,
+        padding: EdgeInsets.all(16.0),
+        child: Center(
+          child: Text(
+            "Your Task Manager Home Page",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Roboto-Regular',
+
+            ),
+          ),
+        ), //
+      ),
+//<<<<<<< deleted_task_Sermonia_Ordinario
     );
   }
 }
@@ -117,6 +154,8 @@ class HomeDrawer extends StatelessWidget {
           ),
         ],
       ),
+//=======
+//>>>>>>> master
     );
   }
 }
