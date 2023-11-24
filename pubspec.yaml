@@ -56,6 +56,10 @@ flutter:
     - family: CustomFont
       fonts:
         - asset: lib/Fonts/Roboto-Regular.ttf
+//<<<<<<< deleted_task_Sermonia_Ordinario
+
+=======
+//>>>>>>> master
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
