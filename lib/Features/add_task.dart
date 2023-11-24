@@ -8,7 +8,6 @@ class AddTask extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Add Task"),
-        
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
