@@ -5,7 +5,7 @@ import 'features/add_task.dart';
 void main() {
 //<<<<<<< deleted_task_Sermonia_Ordinario
   runApp(const TaskManagerApp());
-=======
+//=======
   runApp(TaskManagerApp());
 //>>>>>>> master
 }
@@ -26,20 +26,52 @@ class TaskManagerApp extends StatelessWidget {
         '/': (context) => TaskManagerHome(),
 // deleted_task_Sermonia_Ordinario
         '/deletedTask': (context) => DeletedTask(),
-      },
-    );
-  }
-}
-
-class DeletedTask extends StatelessWidget {
-=======
         '/addTask': (context) => AddTask(),
       },
     );
   }
 }
 
-class TaskManagerHome extends StatelessWidget {
+class DeletedTask extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title:
+            const Text("Deleted Task", style: TextStyle(color: Colors.white)),
+      ),
+      body: Container(
+        color: Colors.blue,
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Checkbox(
+                  value: false,
+                  onChanged: (value) {},
+                ),
+                const Text('Clean', style: TextStyle(color: Colors.white)),
+              ],
+            ),
+            Row(
+              children: [
+                const Text('Yesterday, 8:00 am',
+                    style: TextStyle(color: Colors.white)),
+                const Spacer(),
+                const Icon(Icons.delete, color: Colors.white),
+                const Text('Delete', style: TextStyle(color: Colors.white)),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/*class TaskManagerHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +128,7 @@ class TaskManagerHome extends StatelessWidget {
 //<<<<<<< deleted_task_Sermonia_Ordinario
     );
   }
-}
+}*/
 
 class TaskManagerHome extends StatelessWidget {
   @override
@@ -105,7 +137,7 @@ class TaskManagerHome extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Task Manager",
-          style: TextStyle(fontSize: 20.0, color: Colors.white), 
+          style: TextStyle(fontSize: 20.0, color: Colors.black),
         ),
       ),
       drawer: const HomeDrawer(),
@@ -138,7 +170,14 @@ class HomeDrawer extends StatelessWidget {
       child: ListView(
         children: [
           ListTile(
-            title: const Text('Deleted Task', style: TextStyle(color: Colors.white)), 
+            title: const Text(
+              'Deleted Task',
+              style: TextStyle(
+                color: Colors.white, // Set the text color of the drawer item
+                fontSize: 18.0,
+                fontFamily: 'CustomFont', // Apply the custom font
+              ),
+            ),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
@@ -151,6 +190,27 @@ class HomeDrawer extends StatelessWidget {
                 ),
               );
             },
+          ),
+          ListTile(
+            title: Text(
+              'Add Task',
+              style: TextStyle(
+                color: Colors.white, // Set the text color of the drawer item
+                fontSize: 18.0,
+                fontFamily: 'CustomFont', // Apply the custom font
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context); // Close the drawer
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddTask()),
+              );
+            },
+            tileColor: Colors.blue, // Set the background color of the ListTile
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0), // Apply border radius
+            ),
           ),
         ],
       ),
