@@ -41,7 +41,7 @@ class Task {
 }
 
 class TaskListScreen extends StatefulWidget {
-  final VoidCallback onDeletedTaskListTap; 
+  final VoidCallback onDeletedTaskListTap;
 
   TaskListScreen({
     required this.onDeletedTaskListTap,
@@ -164,11 +164,15 @@ class _TaskListScreenState extends State<TaskListScreen> {
           // Handle the 'Add Task' action
           _navigateToAddTask(context);
         },
+        onCalendarTap: () {
+          Navigator.pop(context); // Close the drawer
+          _navigateToCalendarScreen(context); // Navigate to CalendarPage
+        },
       ),
       body: Column(
         children: [
           Text(
-            'Task', // Added "Task" text as a title
+            'Task',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -226,6 +230,15 @@ class _TaskListScreenState extends State<TaskListScreen> {
     );
   }
 
+  void _navigateToCalendarScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            CalendarPage(tasks: tasks), // Navigate to CalendarPage
+      ),
+    );
+  }
 
   void _toggleTask(BuildContext context, int index) async {
     Task toggledTask = tasks[index];
