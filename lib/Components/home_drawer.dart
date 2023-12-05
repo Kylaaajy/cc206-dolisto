@@ -9,6 +9,7 @@ class HomeDrawer extends StatelessWidget {
   final VoidCallback onAddTaskTap;
   final VoidCallback onTaskListTap;
   final Function() onDeletedTaskListTap;
+  final VoidCallback onCalendarTap;
 
 
   HomeDrawer({
@@ -17,7 +18,7 @@ class HomeDrawer extends StatelessWidget {
     required this.onAddTaskTap,
     required this.onTaskListTap,
     required this.onDeletedTaskListTap,
-
+    required this.onCalendarTap,
   });
 
   @override
@@ -57,6 +58,16 @@ class HomeDrawer extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            onTap: onTaskListTap,
+          ),
+          ListTile(
+            title: Text(
+              'Deleted Tasks',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             onTap: () async {
               Navigator.pop(context); // Close the drawer
               final deletedTasks = await _loadDeletedTasks();
@@ -70,6 +81,16 @@ class HomeDrawer extends StatelessWidget {
                 ),
               );
             },
+          ),
+          ListTile(
+            title: Text(
+              'Calendar',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            onTap: onCalendarTap, 
           ),
         ],
       ),
