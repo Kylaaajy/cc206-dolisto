@@ -172,7 +172,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
       body: Column(
         children: [
           Text(
-            'Task',
+            'Task', // Added "Task" text as a title
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
