@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cc206_dolisto/Features/add_task.dart';
 import 'package:cc206_dolisto/Features/delete_task.dart';
+import 'package:cc206_dolisto/Features/delete_task.dart';
 import 'package:cc206_dolisto/Components/home_drawer.dart';
 import 'package:cc206_dolisto/Features/database_helper.dart';
 import 'package:cc206_dolisto/Features/calendar_page.dart';
@@ -41,7 +42,7 @@ class Task {
 }
 
 class TaskListScreen extends StatefulWidget {
-  final VoidCallback onDeletedTaskListTap; 
+  final VoidCallback onDeletedTaskListTap;
 
   TaskListScreen({
     required this.onDeletedTaskListTap,
@@ -164,6 +165,10 @@ class _TaskListScreenState extends State<TaskListScreen> {
           // Handle the 'Add Task' action
           _navigateToAddTask(context);
         },
+        onCalendarTap: () {
+          Navigator.pop(context); // Close the drawer
+          _navigateToCalendarScreen(context); // Navigate to CalendarPage
+        },
       ),
       body: Column(
         children: [
@@ -226,6 +231,15 @@ class _TaskListScreenState extends State<TaskListScreen> {
     );
   }
 
+  void _navigateToCalendarScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            CalendarPage(tasks: tasks), // Navigate to CalendarPage
+      ),
+    );
+  }
 
   void _toggleTask(BuildContext context, int index) async {
     Task toggledTask = tasks[index];
