@@ -1,78 +1,98 @@
 import 'package:flutter/material.dart';
 
-class AddTask extends StatelessWidget {
-  const AddTask({Key? key}) : super(key: key);
+class AddTask extends StatefulWidget {
+  @override
+  _AddTaskState createState() => _AddTaskState();
+}
+
+class _AddTaskState extends State<AddTask> {
+  final TextEditingController _taskController = TextEditingController();
+  final TextEditingController _detailsController = TextEditingController();
+  DateTime? _selectedDate; // Make _selectedDate nullable
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Task"),
+        title: Text(
+          'Add Task',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Add task",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+            TextField(
+              controller: _taskController,
+              decoration: InputDecoration(labelText: 'Task Name'),
             ),
-            SizedBox(height: 16.0),
-            Text(
-              "Title",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+            SizedBox(height: 10),
+            TextField(
+              controller: _detailsController,
+              decoration:
+                  InputDecoration(labelText: 'Details'), // Add details field
             ),
-            TextFormField(
-              decoration: InputDecoration(
-                hintText: "Enter task title",
-              ),
-            ),
-            SizedBox(height: 16.0),
-            Text(
-              "Add details",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                hintText: "Enter task details",
-              ),
-            ),
-            SizedBox(height: 16.0),
+            SizedBox(height: 20),
             Row(
               children: [
-                Icon(Icons.alarm),
-                Text("Setup reminder"),
-                Spacer(),
-                Switch(value: false, onChanged: (value) {}),
-              ],
-            ),
-            SizedBox(height: 16.0),
-            Row(
-              children: [
-                Icon(Icons.alarm),
-                Text("15 minutes before"),
-                Spacer(),
-                IconButton(
-                  icon: Icon(Icons.add),
+                Text('Due Date:'),
+                SizedBox(width: 10),
+                TextButton(
                   onPressed: () {
-                    // Implement add reminder logic
+                    _selectDate(context);
                   },
+                  child: Text(
+                    _selectedDate != null
+                        ? '${_selectedDate!.toLocal()}'.split(' ')[0]
+                        : 'Select Date',
+                  ),
                 ),
               ],
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                _addTask();
+              },
+              child: Icon(Icons.add),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate ?? DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2101),
+    );
+
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+      });
+    }
+  }
+
+  void _addTask() {
+    if (_taskController.text.isNotEmpty && _selectedDate != null) {
+      //Use a callback function to pass the task to the previous screen.
+      Navigator.pop(
+        context,
+        {
+          'name': _taskController.text,
+          'details': _detailsController.text,
+          'dueDate': _selectedDate!,
+          'isDone': false,
+        },
+      );
+    }
   }
 }
